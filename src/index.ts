@@ -1,7 +1,8 @@
-import babel from "@babel/core";
-import { TwStyleList } from "../types";
-import checker from "./utils/checker";
-import creator from "./utils/creator";
+import babel from '@babel/core';
+
+import { TwStyleList } from '../types';
+import checker from './utils/checker';
+import creator from './utils/creator';
 
 export default ({ types: t }: typeof babel): babel.PluginObj => {
   const { isRnElement, hasClassNameProp } = checker(t);
