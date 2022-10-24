@@ -17,4 +17,14 @@ export default (t: typeof babel.types) => ({
   },
 
   // isClassName
+
+  hasImportedTw: (programPath: babel.NodePath<babel.types.Program>): boolean => {
+    let isTwImported = false;
+    programPath.traverse({
+      ImportDefaultSpecifier({ node }) {
+        if (node.local.name === "tw") isTwImported = true;
+      },
+    });
+    return isTwImported;
+  }
 });

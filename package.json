@@ -18,6 +18,7 @@
     "build": "node scripts/build.js",
     "dev": "node scripts/build.js -watch",
     "test": "jest",
+    "test:watch": "jest --watch",
     "clean": "rimraf dist coverage"
   },
   "main": "dist/index.js",

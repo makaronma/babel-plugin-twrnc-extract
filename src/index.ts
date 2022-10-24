@@ -5,8 +5,8 @@ import checker from './utils/checker';
 import creator from './utils/creator';
 
 export default ({ types: t }: typeof babel): babel.PluginObj => {
-  const { isRnElement, hasClassNameProp } = checker(t);
-  const { createTwStyles, createTwStylesObj } = creator(t);
+  const { isRnElement, hasClassNameProp, hasImportedTw } = checker(t);
+  const { createTwStyles, createTwStylesObj, createImportTw } = creator(t);
   let twStyleList: TwStyleList = [];
 
   return {
@@ -25,8 +25,11 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
               JSXAttribute(attrPath) {
                 if (!attrPath.node.value || !attrPath.node.value.type) return;
                 
+                // scan node inside "classname"
                 if (attrPath.node.name.name === "className") {
                   switch (attrPath.node.value.type) {
+
+                    // className="bg-white"
                     case "StringLiteral":
                       const style = createTwStyles({
                         expressionType: "StringLiteral",
@@ -38,14 +41,20 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
                         t.memberExpression(
                           t.identifier("twStyles"),
                           t.identifier(classId)
-                        )
-                      );
+                          )
+                          );
+                          break;
+
+                    // className={anything...}
+                    case "JSXExpressionContainer":
+                      
                       break;
                     default:
                       break;
                   }
+                  attrPath.node.name.name = "style";
                 } else if (attrPath.node.name.name === "style") {
-
+                  // attrPath.node.name.name="classN"
                 }
               },
               // <---------------- Attribute end ---------------->
@@ -56,7 +65,7 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
         if (twStyleList.length > 0) {
           const fileBody = programPath.node.body;
           fileBody.push(createTwStylesObj(t, twStyleList));
-          // if (!hasImportedTw(programPath)) fileBody.unshift(createImportTw(t));
+          if (!hasImportedTw(programPath)) fileBody.unshift(createImportTw(t));
         }
       },
       // <---------------- File end ---------------->

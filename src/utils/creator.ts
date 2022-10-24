@@ -56,10 +56,10 @@ export default (t: typeof babel.types) => ({
     ]);
   },
 
-  // createImportTw: (t: typeof babel.types): babel.types.ImportDeclaration => {
-  //   return t.importDeclaration(
-  //     [t.importDefaultSpecifier(t.identifier("tw"))],
-  //     t.stringLiteral("~/lib/utils/tw")
-  //   );
-  // },
+  createImportTw: (t: typeof babel.types): babel.types.ImportDeclaration => {
+    return t.importDeclaration(
+      [t.importDefaultSpecifier(t.identifier("tw"))],
+      t.stringLiteral("~/lib/utils/tw")
+    );
+  },
 });
