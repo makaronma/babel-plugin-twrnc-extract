@@ -1,7 +1,6 @@
 import babel from "@babel/core";
-import { AttrPathType } from "../../types";
 
-export default (t: typeof babel.types) => ({
+export default () => ({
   isRnElement(node: babel.types.JSXOpeningElement): boolean {
     return node.name.type === "JSXIdentifier";
   },
@@ -28,9 +27,5 @@ export default (t: typeof babel.types) => ({
       },
     });
     return isTwImported;
-  },
-
-  isJsxAttrClassName(attrPath: AttrPathType): boolean {
-    return attrPath.node.name.name === "className";
   },
 });

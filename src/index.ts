@@ -13,7 +13,7 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
       Program(programPath) {
         
         const twStyleList: TwStyleList = [];
-        const { isRnElement, hasClassNameProp, hasImportedTw, isJsxAttrClassName } = checker(t);
+        const { isRnElement, hasClassNameProp, hasImportedTw } = checker();
         const { createTwStylesObj, createImportTw } = creator(t);
         const { getCombinedExpressionContainer } = getter(t);
         const {
