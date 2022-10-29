@@ -13,11 +13,11 @@
 - [X] ~~*add Transform Style (Conditional Func -> string + template literal)*~~ [2022-10-29]
 
 <!-- ClassNameVariable -->
-- [ ] add Transform Style (Template Literal: boolean)
-- [ ] add Transform Style (Template Literal: number)
-- [ ] add Transform Style (Template Literal: variable)
-- [ ] add Transform Style (Template Literal: conditional boolean -> string)
-- [ ] add Transform Style (Template Literal: conditional func return -> string)
+- [X] ~~*add Transform Style (Template Literal: boolean)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Template Literal: number)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Template Literal: variable)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Template Literal: conditional boolean -> string)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Template Literal: conditional func return -> string)*~~ [2022-10-29]
 
 <!-- StyleOverride -->
 - [ ] add handle Style Override twStyle (style after className)
