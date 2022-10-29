@@ -14,7 +14,7 @@ type AcceptClassNameExpressionType<
 
 interface CreateTwStylesProps {
   className: string;
-  expressionType: AcceptClassNameExpressionType<"StringLiteral" | "ConditionalExpression">;
+  expressionType: AcceptClassNameExpressionType<"StringLiteral">;
 }
 
 export default (t: typeof babel.types) => ({
@@ -24,7 +24,7 @@ export default (t: typeof babel.types) => ({
     const { className, expressionType } = props;
 
     switch (expressionType) {
-      case "StringLiteral":
+      case "StringLiteral": {
         return t.taggedTemplateExpression(
           t.identifier("tw"),
           t.templateLiteral(
@@ -37,12 +37,15 @@ export default (t: typeof babel.types) => ({
             []
           )
         );
-      // case "TemplateLiteral":
-      //   return t.taggedTemplateExpression(t.identifier("tw"), className);
+      }
 
-      // default:
-      //   return undefined;
+      default:
+        return undefined;
     }
+  },
+
+  createTwStylesFromTml: (tpl: babel.types.TemplateLiteral): babel.types.TaggedTemplateExpression => {
+    return t.taggedTemplateExpression(t.identifier("tw"), tpl);
   },
 
   createTwStylesObj: (

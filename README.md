@@ -7,10 +7,10 @@
 - [X] ~~*add Transform Style (Template Literal: string)*~~ [2022-10-29]
 
 <!-- ClassNameCondition -->
-- [ ] add Transform Style (Conditional boolean -> string)
-- [ ] add Transform Style (Conditional boolean -> template literal)
-- [ ] add Transform Style (Conditional boolean -> string + template literal)
-- [ ] add Transform Style (Conditional Func -> string + template literal)
+- [X] ~~*add Transform Style (Conditional boolean -> string)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Conditional boolean -> template literal)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Conditional boolean -> string + template literal)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Conditional Func -> string + template literal)*~~ [2022-10-29]
 
 <!-- ClassNameVariable -->
 - [ ] add Transform Style (Template Literal: boolean)

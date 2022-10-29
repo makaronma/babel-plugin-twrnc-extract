@@ -23,8 +23,6 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
           // <---------------- JSX start ---------------->
           JSXOpeningElement(jsxPath) {
             if (!isRnElement(jsxPath.node) || !hasClassNameProp(jsxPath.node)) return;
-            
-            const jsxId = jsxPath.scope.generateUidIdentifier("jsx").name;
 
             jsxPath.traverse({
               // <---------------- Attribute start ---------------->
@@ -32,12 +30,10 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
                 if (!attrPath.node.value || !attrPath.node.value.type) return;
                 
                 // scan node inside "classname"
-                if (attrPath.node.name.name==='className') {
+                if (attrPath.node.name.name === "className") {
                   if (attrPath.node.value.type === "StringLiteral") {
                     handleClassName_StringLiteral(attrPath);
-                  } else if (
-                    attrPath.node.value.type === "JSXExpressionContainer"
-                  ) {
+                  } else if (attrPath.node.value.type === "JSXExpressionContainer") {
                     handleClassName_JSXExpressionContainer(attrPath);
                   }
                 } else if (attrPath.node.name.name === "style") {
