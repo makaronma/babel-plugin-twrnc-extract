@@ -1,47 +1,20 @@
 import babel from "@babel/core";
 import { TwStyleList } from "../../types";
 
-
-const classNameExpressionType = [
-  "StringLiteral",
-  "ConditionalExpression",
-  "TemplateLiteral",
-] as const;
-
-type AcceptClassNameExpressionType<
-  T extends typeof classNameExpressionType[number]
-> = Extract<typeof classNameExpressionType[number], T>;
-
-interface CreateTwStylesProps {
-  className: string;
-  expressionType: AcceptClassNameExpressionType<"StringLiteral">;
-}
-
 export default (t: typeof babel.types) => ({
-  createTwStyles: (
-    props: CreateTwStylesProps
-  ): babel.types.TaggedTemplateExpression | undefined => {
-    const { className, expressionType } = props;
-
-    switch (expressionType) {
-      case "StringLiteral": {
-        return t.taggedTemplateExpression(
-          t.identifier("tw"),
-          t.templateLiteral(
-            [
-              t.templateElement({
-                raw: className,
-                cooked: className,
-              }),
-            ],
-            []
-          )
-        );
-      }
-
-      default:
-        return undefined;
-    }
+  createTwStylesFromString: (className: string): babel.types.TaggedTemplateExpression | undefined => {
+    return t.taggedTemplateExpression(
+      t.identifier("tw"),
+      t.templateLiteral(
+        [
+          t.templateElement({
+            raw: className,
+            cooked: className,
+          }),
+        ],
+        []
+      )
+    );
   },
 
   createTwStylesFromTml: (tpl: babel.types.TemplateLiteral): babel.types.TaggedTemplateExpression => {
@@ -71,8 +44,13 @@ export default (t: typeof babel.types) => ({
   },
 
   createStyleExpression: (classId: string) => {
+    return t.memberExpression(t.identifier("twStyles"), t.identifier(classId))
+  },
+
+  createStyleExpressionContainer: (classId: string) => {
     return t.jSXExpressionContainer(
       t.memberExpression(t.identifier("twStyles"), t.identifier(classId))
     );
   },
+
 });

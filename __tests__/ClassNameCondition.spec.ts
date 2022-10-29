@@ -45,12 +45,12 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const someLength2 = 100;
       const Comp = () => (
         <View
-          style={true ? twStyles._attr2_conExp_conTml : twStyles._attr2_conExp_conTml}
+          style={true ? twStyles._attr2_conExp_conTml : twStyles._attr2_conExp_altTml}
         ></View>
       );
       const twStyles = {
         _attr2_conExp_conTml: tw\`w-\${someLength}\`,
-        _attr2_conExp_conTml: tw\`h-\${someLength}\`,
+        _attr2_conExp_altTml: tw\`h-\${someLength}\`,
       };
     `,
   },
@@ -90,13 +90,13 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
           style={
             getChoice()
               ? twStyles._attr2_conExp_conStr
-              : twStyles._attr2_conExp_conTml
+              : twStyles._attr2_conExp_altTml
           }
         ></View>
       );
       const twStyles = {
         _attr2_conExp_conStr: tw\`flex-row\`,
-        _attr2_conExp_conTml: tw\`flex-col\`,
+        _attr2_conExp_altTml: tw\`flex-col\`,
       };
     `,
   },
