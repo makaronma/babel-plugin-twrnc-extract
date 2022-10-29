@@ -7,12 +7,13 @@ import creator from './utils/creator';
 export default ({ types: t }: typeof babel): babel.PluginObj => {
   const { isRnElement, hasClassNameProp, hasImportedTw } = checker(t);
   const { createTwStyles, createTwStylesObj, createImportTw } = creator(t);
-  let twStyleList: TwStyleList = [];
-
+  
   return {
     visitor: {
       // <---------------- File start ---------------->
       Program(programPath) {
+        let twStyleList: TwStyleList = [];
+        
         programPath.traverse({
           // <---------------- JSX start ---------------->
           JSXOpeningElement(jsxPath) {
