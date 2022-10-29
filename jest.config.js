@@ -16,7 +16,7 @@ module.exports = {
   // The test environment that will be used for testing
   testEnvironment: 'node',
   transform: {
-    '\\.ts$': ['babel-jest', { configFile: './.babelrc.plugin' }],
+    '\\.ts$': ['babel-jest', { configFile: './.plugin.babelrc' }],
   },
 
   // The glob patterns Jest uses to detect test files

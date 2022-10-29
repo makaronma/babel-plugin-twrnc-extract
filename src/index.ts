@@ -3,23 +3,28 @@ import babel from '@babel/core';
 import { TwStyleList } from '../types';
 import checker from './utils/checker';
 import creator from './utils/creator';
+import handler from './utils/handler';
 
 export default ({ types: t }: typeof babel): babel.PluginObj => {
-  const { isRnElement, hasClassNameProp, hasImportedTw } = checker(t);
-  const { createTwStyles, createTwStylesObj, createImportTw } = creator(t);
-  
   return {
     visitor: {
       // <---------------- File start ---------------->
       Program(programPath) {
-        let twStyleList: TwStyleList = [];
         
+        const twStyleList: TwStyleList = [];
+        const { isRnElement, hasClassNameProp, hasImportedTw, isJsxAttrClassName } = checker(t);
+        const { createTwStylesObj, createImportTw } = creator(t);
+        const {
+          handleClassName_StringLiteral,
+          handleClassName_JSXExpressionContainer,
+        } = handler(t, twStyleList);
+
         programPath.traverse({
           // <---------------- JSX start ---------------->
           JSXOpeningElement(jsxPath) {
             if (!isRnElement(jsxPath.node) || !hasClassNameProp(jsxPath.node)) return;
             
-            const jsxId = jsxPath.scope.generateUidIdentifier("u").name;
+            const jsxId = jsxPath.scope.generateUidIdentifier("jsx").name;
 
             jsxPath.traverse({
               // <---------------- Attribute start ---------------->
@@ -27,33 +32,14 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
                 if (!attrPath.node.value || !attrPath.node.value.type) return;
                 
                 // scan node inside "classname"
-                if (attrPath.node.name.name === "className") {
-                  switch (attrPath.node.value.type) {
-
-                    // className="bg-white"
-                    case "StringLiteral":
-                      const style = createTwStyles({
-                        expressionType: "StringLiteral",
-                        className: attrPath.node.value.value,
-                      });
-                      const classId = jsxId;
-                      style && twStyleList.push({ classId, style });
-                      attrPath.node.value = t.jSXExpressionContainer(
-                        t.memberExpression(
-                          t.identifier("twStyles"),
-                          t.identifier(classId)
-                          )
-                          );
-                          break;
-
-                    // className={anything...}
-                    case "JSXExpressionContainer":
-                      
-                      break;
-                    default:
-                      break;
+                if (attrPath.node.name.name==='className') {
+                  if (attrPath.node.value.type === "StringLiteral") {
+                    handleClassName_StringLiteral(attrPath);
+                  } else if (
+                    attrPath.node.value.type === "JSXExpressionContainer"
+                  ) {
+                    handleClassName_JSXExpressionContainer(attrPath);
                   }
-                  attrPath.node.name.name = "style";
                 } else if (attrPath.node.name.name === "style") {
                   // attrPath.node.name.name="classN"
                 }
@@ -65,8 +51,8 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
         });
         if (twStyleList.length > 0) {
           const fileBody = programPath.node.body;
-          fileBody.push(createTwStylesObj(t, twStyleList));
-          if (!hasImportedTw(programPath)) fileBody.unshift(createImportTw(t));
+          fileBody.push(createTwStylesObj(twStyleList));
+          if (!hasImportedTw(programPath)) fileBody.unshift(createImportTw());
         }
       },
       // <---------------- File end ---------------->

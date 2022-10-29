@@ -2,8 +2,9 @@
 
 ### Task List:
 <!-- ClassNameBasic -->
-- [ ] add Transform Style (Only String)
-- [ ] add Transform Style (Template Literal: string)
+- [X] ~~*add Transform Style (Only String)*~~ [2022-10-25]
+- [X] ~~*add Transform Style (Only String in expression)*~~ [2022-10-29]
+- [X] ~~*add Transform Style (Template Literal: string)*~~ [2022-10-29]
 
 <!-- ClassNameCondition -->
 - [ ] add Transform Style (Conditional boolean -> string)
@@ -27,4 +28,6 @@
 - [ ] add handle Style Override twStyle (style is array)
 
 <!-- ImportTw -->
-- [ ] add handle Import TW
+- [X] ~~*Import TW (if className is added)*~~ [2022-10-25]
+- [ ] Dont Import TW & add twStyles (if no className is used)
+- [ ] Dont Import TW (if TW is imported already)

@@ -18,7 +18,9 @@ interface CreateTwStylesProps {
 }
 
 export default (t: typeof babel.types) => ({
-  createTwStyles: (props: CreateTwStylesProps): babel.types.TaggedTemplateExpression | undefined => {
+  createTwStyles: (
+    props: CreateTwStylesProps
+  ): babel.types.TaggedTemplateExpression | undefined => {
     const { className, expressionType } = props;
 
     switch (expressionType) {
@@ -43,7 +45,9 @@ export default (t: typeof babel.types) => ({
     }
   },
 
-  createTwStylesObj: ( t: typeof babel.types, twStyleList: TwStyleList): babel.types.VariableDeclaration => {
+  createTwStylesObj: (
+    twStyleList: TwStyleList
+  ): babel.types.VariableDeclaration => {
     return t.variableDeclaration("const", [
       t.variableDeclarator(
         t.identifier("twStyles"),
@@ -56,10 +60,16 @@ export default (t: typeof babel.types) => ({
     ]);
   },
 
-  createImportTw: (t: typeof babel.types): babel.types.ImportDeclaration => {
+  createImportTw: (): babel.types.ImportDeclaration => {
     return t.importDeclaration(
       [t.importDefaultSpecifier(t.identifier("tw"))],
       t.stringLiteral("~/lib/utils/tw")
+    );
+  },
+
+  createStyleExpression: (classId: string) => {
+    return t.jSXExpressionContainer(
+      t.memberExpression(t.identifier("twStyles"), t.identifier(classId))
     );
   },
 });

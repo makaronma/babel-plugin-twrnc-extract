@@ -11,8 +11,8 @@ export default (tests: Parameters<typeof pluginTester>[0]["tests"]) =>
       // filename: 'test-file.tsx',
       plugins: [
         "@babel/plugin-syntax-jsx",
-        ["@babel/plugin-syntax-typescript", { isTSX: true }],
       ],
     },
     tests,
   });
+  
