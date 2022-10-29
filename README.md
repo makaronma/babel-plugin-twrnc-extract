@@ -29,5 +29,5 @@
 
 <!-- ImportTw -->
 - [X] ~~*Import TW (if className is added)*~~ [2022-10-25]
-- [ ] Dont Import TW & add twStyles (if no className is used)
-- [ ] Dont Import TW (if TW is imported already)
+- [X] ~~*Dont Import TW & add twStyles (if no className is used)*~~ [2022-10-29]
+- [X] ~~*Dont Import TW (if TW is imported already)*~~ [2022-10-29]
