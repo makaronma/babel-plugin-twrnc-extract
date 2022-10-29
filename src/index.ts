@@ -23,21 +23,46 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
           // <---------------- JSX start ---------------->
           JSXOpeningElement(jsxPath) {
             if (!isRnElement(jsxPath.node) || !hasClassNameProp(jsxPath.node)) return;
-
+            let oriStyle: babel.types.JSXExpressionContainer | undefined;
+            jsxPath.traverse({
+              JSXAttribute(attrPath) {
+                if (attrPath.node.name.name === "style" && attrPath.node.value?.type === "JSXExpressionContainer") {
+                  oriStyle = attrPath.node.value;
+                  attrPath.remove();
+                }
+              },
+              // <---------------- Attribute start ---------------->
+              // <---------------- Attribute end ---------------->
+            });
             jsxPath.traverse({
               // <---------------- Attribute start ---------------->
               JSXAttribute(attrPath) {
                 if (!attrPath.node.value || !attrPath.node.value.type) return;
-                
                 // scan node inside "classname"
                 if (attrPath.node.name.name === "className") {
+                  let twExpContainer: babel.types.JSXExpressionContainer | undefined;
                   if (attrPath.node.value.type === "StringLiteral") {
-                    handleClassName_StringLiteral(attrPath);
+                    twExpContainer = handleClassName_StringLiteral(attrPath);
                   } else if (attrPath.node.value.type === "JSXExpressionContainer") {
-                    handleClassName_JSXExpressionContainer(attrPath);
+                    twExpContainer = handleClassName_JSXExpressionContainer(attrPath);
                   }
-                } else if (attrPath.node.name.name === "style") {
-                  // attrPath.node.name.name="classN"
+                  if (
+                    oriStyle &&
+                    oriStyle.expression.type !== "JSXEmptyExpression" &&
+                    twExpContainer &&
+                    twExpContainer.expression.type !== "JSXEmptyExpression"
+                  ) {
+                    const oriExp = oriStyle.expression;
+                    const twExp = twExpContainer.expression;
+                    const updatedStyleExpContainer = t.jSXExpressionContainer(
+                      t.arrayExpression(
+                        oriExp.type === "ArrayExpression"
+                          ? [twExp, ...oriExp.elements]
+                          : [twExp, oriExp]
+                      )
+                    );
+                    attrPath.node.value = updatedStyleExpContainer;
+                  }
                 }
               },
               // <---------------- Attribute end ---------------->

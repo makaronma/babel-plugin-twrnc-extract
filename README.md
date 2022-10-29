@@ -20,12 +20,12 @@
 - [X] ~~*add Transform Style (Template Literal: conditional func return -> string)*~~ [2022-10-29]
 
 <!-- StyleOverride -->
-- [ ] add handle Style Override twStyle (style after className)
-- [ ] add handle Style Override twStyle (className after style)
-- [ ] add handle Style Override twStyle (style not exist)
-- [ ] add handle Style Override twStyle (className not exist)
-- [ ] add handle Style Override twStyle (use styleSheet)
-- [ ] add handle Style Override twStyle (style is array)
+- [X] ~~*add handle Style Override twStyle (style after className)*~~ [2022-10-29]
+- [X] ~~*add handle Style Override twStyle (className after style)*~~ [2022-10-29]
+- [X] ~~*add handle Style Override twStyle (style not exist)*~~ [2022-10-29]
+- [X] ~~*add handle Style Override twStyle (className not exist)*~~ [2022-10-29]
+- [X] ~~*add handle Style Override twStyle (use styleSheet)*~~ [2022-10-29]
+- [X] ~~*add handle Style Override twStyle (style is array)*~~ [2022-10-29]
 
 <!-- ImportTw -->
 - [X] ~~*Import TW (if className is added)*~~ [2022-10-25]

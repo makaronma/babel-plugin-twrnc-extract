@@ -5,7 +5,7 @@ import creator from "./creator";
 export default (t: typeof babel.types, twStyleList: TwStyleList) => ({
 
   /** @handle className="flex-1" */
-  handleClassName_StringLiteral(attrPath: AttrPathType) {
+  handleClassName_StringLiteral(attrPath: AttrPathType) : babel.types.JSXExpressionContainer | undefined {
     if (attrPath.node.value?.type !== "StringLiteral") return;
     const { createTwStylesFromString, createStyleExpressionContainer }  = creator(t);
     const attrPathId = attrPath.scope.generateUidIdentifier("attr").name;
@@ -17,10 +17,12 @@ export default (t: typeof babel.types, twStyleList: TwStyleList) => ({
 
     attrPath.node.value = createStyleExpressionContainer(classId);
     attrPath.node.name.name = "style";
+
+    return attrPath.node.value;
   },
 
   /** @handle className={...anything...} */
-  handleClassName_JSXExpressionContainer(attrPath: AttrPathType) {
+  handleClassName_JSXExpressionContainer(attrPath: AttrPathType) : babel.types.JSXExpressionContainer | undefined  {
     if (attrPath.node.value?.type !== "JSXExpressionContainer") return;
     const { createTwStylesFromString, createStyleExpression, createStyleExpressionContainer, createTwStylesFromTml } = creator(t);
     const attrPathId = attrPath.scope.generateUidIdentifier("attr").name;
@@ -36,7 +38,7 @@ export default (t: typeof babel.types, twStyleList: TwStyleList) => ({
 
         attrPath.node.name.name = "style";
         attrPath.node.value = createStyleExpressionContainer(classId);
-        break;
+        return attrPath.node.value;
       }
 
       /** @handle className={`flex-1 ${anyOtherVariables}`} */
@@ -47,7 +49,7 @@ export default (t: typeof babel.types, twStyleList: TwStyleList) => ({
         
         attrPath.node.name.name = "style";
         attrPath.node.value = createStyleExpressionContainer(classId);
-        break;
+        return attrPath.node.value;
       }
       
       /** @handle className={true ? "flex-1" : "flex-2"} */
@@ -92,7 +94,7 @@ export default (t: typeof babel.types, twStyleList: TwStyleList) => ({
           },
         });
         attrPath.node.name.name = "style";
-        break;
+        return attrPath.node.value;
       }
 
       default:
