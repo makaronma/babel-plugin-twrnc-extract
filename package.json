@@ -3,25 +3,27 @@
   "version": "0.0.1",
   "author": "makaronma",
   "description": "Use className in your React Native project with twrnc",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/makaronma/babel-plugin-twrnc-extract"
-  },
   "keywords": [
     "babel",
     "babel-plugin",
     "react-native",
     "tailwind"
   ],
+  "license": "MIT",
+  "files": ["dist"],
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makaronma/babel-plugin-twrnc-extract"
+  },
   "scripts": {
-    "build": "node scripts/build.js",
     "dev": "node scripts/build.js -watch",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean": "rimraf dist coverage"
+    "clean": "rimraf dist coverage",
+    "build": "node scripts/build.js",
+    "prepublish": "pnpm test && pnpm build"
   },
-  "main": "dist/index.js",
   "devDependencies": {
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.3",
