@@ -30,7 +30,7 @@ yarn add -D babel-plugin-twrnc-extract
 
 ## Use
 
-You should have a "tw.ts" or "tw.js" file. See the documentation for example. <https://github.com/jaredh159/tailwind-react-native-classnames#customization>
+You should have a `tw.ts` or `tw.js` file. See the documentation for example. <https://github.com/jaredh159/tailwind-react-native-classnames#customization>
 
 ```js
 // lib/utils/tailwind.ts
