@@ -1,4 +1,5 @@
 import babel from '@babel/core';
+import path from 'path';
 
 import { TwStyleList } from '../types';
 import checker from './utils/checker';
@@ -10,7 +11,8 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
   return {
     visitor: {
       // <---------------- File start ---------------->
-      Program(programPath) {
+      Program(programPath, programState) {
+        const twPath = "twPath" in this.opts ? this.opts.twPath as string : undefined;
         
         const twStyleList: TwStyleList = [];
         const { isRnElement, hasClassNameProp, hasImportedTw } = checker();
@@ -20,6 +22,7 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
           handleClassName_StringLiteral,
           handleClassName_JSXExpressionContainer,
         } = handler(t, twStyleList);
+
 
         programPath.traverse({
           // <---------------- JSX start ---------------->
@@ -67,7 +70,15 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
         if (twStyleList.length > 0) {
           const fileBody = programPath.node.body;
           fileBody.push(createTwStylesObj(twStyleList));
-          if (!hasImportedTw(programPath)) fileBody.unshift(createImportTw());
+
+          const curr = programState.file.opts.filename;
+          const root = programState.file.opts.cwd;
+          if (!root || !curr || !twPath) return;
+          const twAbsPath = path.join(root, twPath);
+
+          const relativePath = `./${path.relative(path.dirname(curr), twAbsPath)}`;
+
+          if (!hasImportedTw(programPath)) fileBody.unshift(createImportTw(relativePath));
         }
       },
       // <---------------- File end ---------------->

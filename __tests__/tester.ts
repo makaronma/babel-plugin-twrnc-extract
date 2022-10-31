@@ -6,7 +6,7 @@ export default (tests: Parameters<typeof pluginTester>[0]["tests"]) =>
     // prettierFormatter: {},
     pluginName: "babel-plugin-twrnc-split",
     plugin,
-    // pluginOptions: { deprecations: v31 },
+    pluginOptions: { twPath:"lib/utils/tw" },
     babelOptions: {
       // filename: 'test-file.tsx',
       plugins: [

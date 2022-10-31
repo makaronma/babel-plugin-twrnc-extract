@@ -3,7 +3,7 @@
 This plugin let you use className in your React Native project with twrnc.
 
 ## Usage
-```ts
+```tsx
 import React from 'react';
 
 const YourComponent = () => {
@@ -35,7 +35,12 @@ Add it as a plugin in `.babelrc`:
 ```js
 {
   "plugins": [
-    "twrnc-extract",
+    [
+      "twrnc-extract",
+      {
+        "twPath": "lib/utils/tw"
+      }
+    ],
     // other plugins. . .
   ]
 }
@@ -57,7 +62,7 @@ module.exports = (api) => {
 
 Then, Add a global type file e.g. `rn.d.ts`:
 
-```ts
+```typescript
 import "react-native";
 
 declare module "react-native" {

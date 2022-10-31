@@ -36,10 +36,10 @@ export default (t: typeof babel.types) => ({
     ]);
   },
 
-  createImportTw: (): babel.types.ImportDeclaration => {
+  createImportTw: (relativePath: string): babel.types.ImportDeclaration => {
     return t.importDeclaration(
       [t.importDefaultSpecifier(t.identifier("tw"))],
-      t.stringLiteral("~/lib/utils/tw")
+      t.stringLiteral(relativePath)
     );
   },
 
