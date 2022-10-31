@@ -38,6 +38,7 @@ Add it as a plugin in `.babelrc`:
     [
       "twrnc-extract",
       {
+        // default: "lib/tw"
         "twPath": "lib/utils/tw"
       }
     ],

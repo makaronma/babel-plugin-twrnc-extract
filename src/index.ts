@@ -71,14 +71,18 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
           const fileBody = programPath.node.body;
           fileBody.push(createTwStylesObj(twStyleList));
 
+          if (hasImportedTw(programPath)) return;
           const curr = programState.file.opts.filename;
           const root = programState.file.opts.cwd;
-          if (!root || !curr || !twPath) return;
-          const twAbsPath = path.join(root, twPath);
+          let relativePath: string = "";
+          if (!root || !curr || !twPath) {
+            relativePath = "./lib/tw";
+          } else {
+            const twAbsPath = path.join(root, twPath);
+            relativePath = `./${path.relative(path.dirname(curr), twAbsPath)}`;
+          }
 
-          const relativePath = `./${path.relative(path.dirname(curr), twAbsPath)}`;
-
-          if (!hasImportedTw(programPath)) fileBody.unshift(createImportTw(relativePath));
+          fileBody.unshift(createImportTw(relativePath));
         }
       },
       // <---------------- File end ---------------->

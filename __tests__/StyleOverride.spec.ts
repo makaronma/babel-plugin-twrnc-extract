@@ -10,7 +10,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
     `,
 
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => (
         <View
           style={[
@@ -33,7 +33,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
     `,
 
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => (
         <View
           style={[
@@ -56,7 +56,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
     `,
 
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => <View style={twStyles._attr_str}></View>;
       const twStyles = {
         _attr_str: tw\`flex-1\`,
@@ -91,7 +91,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
     `,
 
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => <View style={[twStyles._attr_str, styles.comp]}></View>;
       const styles = StyleSheet.create({
         comp: {
@@ -121,7 +121,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       `,
 
       output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => (
         <View style={[twStyles._attr_str, styles.comp, styles.hi]}></View>
       );

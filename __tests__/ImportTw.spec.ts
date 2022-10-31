@@ -11,7 +11,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
     `,
 
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => <View style={twStyles._attr_str}></View>;
       const twStyles = {
         _attr_str: tw\`flex-1\`,
@@ -32,11 +32,11 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
   {
     title: "Dont Import TW (if TW is imported already)",
     code: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => <View className={'flex-1'}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => <View style={twStyles._attr_exp_str}></View>;
       const twStyles = {
         _attr_exp_str: tw\`flex-1\`,

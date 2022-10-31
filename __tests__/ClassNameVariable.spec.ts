@@ -11,7 +11,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={\`\${num} flex-1\`}></View>;
       `,
       output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const num = 1;
       const Comp = () => <View style={twStyles._attr_exp_tpl}></View>;
       const twStyles = {
@@ -25,7 +25,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={\`w-[\${123}px] flex-1\`}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => <View style={twStyles._attr_exp_tpl}></View>;
       const twStyles = {
         _attr_exp_tpl: tw\`w-[\${123}px] flex-1\`,
@@ -39,7 +39,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={\`w-[\${someVar}px] flex-1\`}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const someVar = 123;
       const Comp = () => <View style={twStyles._attr_exp_tpl}></View>;
       const twStyles = {
@@ -54,7 +54,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={\`\${true ? "flex-row" : "flex-col"} flex-1\`}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => <View style={twStyles._attr_exp_tpl}></View>;
       const twStyles = {
         _attr_exp_tpl: tw\`\${true ? "flex-row" : "flex-col"} flex-1\`,
@@ -69,7 +69,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={\`\${getChoice() ? "flex-row" : "flex-col"} flex-1\`}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const getChoice = () => Math.random();
       const Comp = () => <View style={twStyles._attr_exp_tpl}></View>;
       const twStyles = {

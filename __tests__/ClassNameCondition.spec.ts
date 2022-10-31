@@ -10,7 +10,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={true ? "flex-1" : true ? true ? "flex-2" : "flex-3" : "flex-4"}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const Comp = () => (
         <View
           style={
@@ -40,7 +40,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={true ? \`w-\${someLength}\` : \`h-\${someLength}\`}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const someLength = 100;
       const someLength2 = 100;
       const Comp = () => (
@@ -62,7 +62,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
       const Comp = () => <View className={true ? \`w-\${someLength}\` : "flex-col"}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const someLength = 100;
       const Comp = () => (
         <View
@@ -83,7 +83,7 @@ const tests: Parameters<typeof pluginTester>[0]["tests"] = [
     const Comp = () => <View className={getChoice() ? "flex-row" : \`flex-col\`}></View>;
     `,
     output: dedent`
-      import tw from "~/lib/utils/tw";
+      import tw from "./lib/tw";
       const getChoice = () => Math.random();
       const Comp = () => (
         <View
