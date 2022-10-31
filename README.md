@@ -30,6 +30,19 @@ yarn add -D babel-plugin-twrnc-extract
 
 ## Use
 
+You should have a "tw.ts" or "tw.js" file. See the documentation for example. <https://github.com/jaredh159/tailwind-react-native-classnames#customization>
+
+```js
+// lib/utils/tailwind.ts
+import { create } from 'twrnc';
+
+// create the customized version...
+const tw = create(require(`../../tailwind.config.js`)); // <- your path may differ
+
+// ... and then this becomes the main function your app uses
+export default tw;
+```
+
 Add it as a plugin in `.babelrc`:
 
 ```js
@@ -38,8 +51,7 @@ Add it as a plugin in `.babelrc`:
     [
       "twrnc-extract",
       {
-        // default: "lib/tw"
-        "twPath": "lib/utils/tw"
+        "twPath": "lib/utils/tw" // default "lib/tw"
       }
     ],
     // other plugins. . .
@@ -95,4 +107,38 @@ declare module "react-native" {
     className?: string;
   }
 }
+```
+
+
+## How it works
+
+**In**
+
+```js
+const YourComponent = () => {
+  return (
+    <View className="bg-black flex-1">
+      <Text className="text-white">Hello World!</Text>
+    </View>
+  );
+}
+```
+
+**Out**
+
+```js
+import tw from "./lib/tw";
+
+const YourComponent = () => {
+  return (
+    <View style={twStyles._attr_str}>
+      <Text style={twStyles._attr2_str}>Hello World!</Text>
+    </View>
+  );
+};
+
+const twStyles = {
+  _attr_str: tw`bg-black flex-1`,
+  _attr2_str: tw`text-white`
+};
 ```
