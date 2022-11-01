@@ -1,6 +1,8 @@
 # babel-plugin-twrnc-extract
 
-This plugin let you use className in your React Native project with twrnc.
+This plugin let you use className in your React Native project with twrnc. 
+
+Try out the example app [here](https://github.com/makaronma/babel-plugin-twrnc-extract/tree/main/example).
 
 ## Usage
 ```tsx
@@ -16,6 +18,10 @@ const YourComponent = () => {
 
 ```
 
+## Prerequisites
+
+Make sure you have installed [twrnc](https://github.com/jaredh159/tailwind-react-native-classnames) in your react native project.
+
 ## Installation
 
 npm:
@@ -30,10 +36,10 @@ yarn add -D babel-plugin-twrnc-extract
 
 ## Use
 
-You should have a "tw.ts" or "tw.js" file. See the documentation for example. <https://github.com/jaredh159/tailwind-react-native-classnames#customization>
+You should have a `tw.ts` or `tw.js`. See the [documentation](https://github.com/jaredh159/tailwind-react-native-classnames#customization) for example.
 
 ```js
-// lib/utils/tailwind.ts
+// lib/utils/tw.ts
 import { create } from 'twrnc';
 
 // create the customized version...
@@ -49,7 +55,7 @@ Add it as a plugin in `.babelrc`:
 {
   "plugins": [
     [
-      "twrnc-extract",
+      "twrnc-extract", 
       {
         "twPath": "lib/utils/tw" // default "lib/tw"
       }
@@ -66,7 +72,12 @@ module.exports = (api) => {
   api.cache(true);
   return {
     plugins: [
-      "twrnc-extract",
+      [
+        "twrnc-extract", 
+        {
+          "twPath": "lib/utils/tw" // default "lib/tw"
+        }
+      ],
       // other plugins. . .
     ],
   };
