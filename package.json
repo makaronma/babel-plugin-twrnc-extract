@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-twrnc-extract",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "makaronma",
   "description": "Use className in your React Native project with twrnc",
   "keywords": [
