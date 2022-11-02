@@ -26,13 +26,13 @@ Make sure you have installed [twrnc](https://github.com/jaredh159/tailwind-react
 npm:
 
 ```shell
-npm i babel-plugin-twrnc-extract
+npm i twrnc
 ```
 
 yarn:
 
 ```shell
-yarn add babel-plugin-twrnc-extract
+yarn add twrnc
 ```
 
 ## Installation
