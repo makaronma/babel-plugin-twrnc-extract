@@ -2059,10 +2059,10 @@ babel-plugin-syntax-trailing-function-commas@^7.0.0-beta.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-7.0.0-beta.0.tgz#aa213c1435e2bffeb6fca842287ef534ad05d5cf"
   integrity sha512-Xj9XuRuz3nTSbaTXWv3itLOcxyF4oPD8douBBmj7U9BBC6nEBYfyOJYQMf/8PJAFotC62UY5dFfIGEPr7WswzQ==
 
-babel-plugin-twrnc-extract@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-twrnc-extract/-/babel-plugin-twrnc-extract-0.0.4.tgz#27fae5e5441c7f405c6e0452ec90e00ab3375416"
-  integrity sha512-XONuOTdMlHRWiN9gl+UQ+bpMC+fEMsaWLjSPzeuloEPvuqNRnBNpOacuNh5j6LcsFI3Ns71j2XM8WajjbGdgCA==
+babel-plugin-twrnc-extract@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/babel-plugin-twrnc-extract/-/babel-plugin-twrnc-extract-0.0.6.tgz#eda385b618323a9fefbac7aab3272622fb7a8d95"
+  integrity sha512-qhaP9ri5dhgqeCFRRdK3sAVWFQFDmd6U8C5kW/HAIX8Gg8HGvtSgbnOZBuxOjjBZ6E0zJi7nrj7hWwgDBq627A==
 
 babel-preset-expo@~9.2.0:
   version "9.2.0"

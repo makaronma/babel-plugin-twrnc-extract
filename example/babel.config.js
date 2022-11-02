@@ -7,6 +7,7 @@ module.exports = function(api) {
         "twrnc-extract",
         {
           twPath: "lib/utils/tw", // default "lib/tw"
+          acceptedJsxIdentifiers: ["Text", "View", "Image"],
         },
       ],
     ],
