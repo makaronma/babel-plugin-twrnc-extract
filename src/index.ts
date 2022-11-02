@@ -13,9 +13,13 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
       // <---------------- File start ---------------->
       Program(programPath, programState) {
         const twPath = "twPath" in this.opts ? this.opts.twPath as string : undefined;
+        const acceptedJsxIdentifiers =
+          "acceptedJsxIdentifiers" in this.opts
+            ? (this.opts.acceptedJsxIdentifiers as string[])
+            : undefined;
         
         const twStyleList: TwStyleList = [];
-        const { isRnElement, hasClassNameProp, hasImportedTw } = checker();
+        const { isAcceptedJsx, hasClassNameProp, hasImportedTw } = checker();
         const { createTwStylesObj, createImportTw } = creator(t);
         const { getCombinedExpressionContainer } = getter(t);
         const {
@@ -27,7 +31,7 @@ export default ({ types: t }: typeof babel): babel.PluginObj => {
         programPath.traverse({
           // <---------------- JSX start ---------------->
           JSXOpeningElement(jsxPath) {
-            if (!isRnElement(jsxPath.node) || !hasClassNameProp(jsxPath.node)) return;
+            if (!isAcceptedJsx(jsxPath.node, acceptedJsxIdentifiers) || !hasClassNameProp(jsxPath.node)) return;
             let oriStyle: babel.types.JSXExpressionContainer | undefined;
 
             // tmp store original style expression container & remove it

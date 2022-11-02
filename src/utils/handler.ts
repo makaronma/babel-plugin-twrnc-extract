@@ -1,6 +1,8 @@
 import babel from "@babel/core";
-import { AttrPathType, TwStyleList } from "../../types";
+import { TwStyleList } from "../../types";
 import creator from "./creator";
+
+type AttrPathType = babel.NodePath<babel.types.JSXAttribute>
 
 export default (t: typeof babel.types, twStyleList: TwStyleList) => ({
 

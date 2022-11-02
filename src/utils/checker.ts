@@ -1,8 +1,16 @@
 import babel from "@babel/core";
 
+const defaultAcceptedJsxIdentifiers = ["View", "Text", "Image"];
+
 export default () => ({
-  isRnElement(node: babel.types.JSXOpeningElement): boolean {
-    return node.name.type === "JSXIdentifier";
+  isAcceptedJsx(
+    node: babel.types.JSXOpeningElement,
+    acceptedJsxIdentifiers: string[] = defaultAcceptedJsxIdentifiers
+  ): boolean {
+    return (
+      node.name.type === "JSXIdentifier" &&
+      acceptedJsxIdentifiers.indexOf(node.name.name) > -1
+    );
   },
 
   hasClassNameProp(node: babel.types.JSXOpeningElement): boolean {

@@ -12,6 +12,7 @@
   "license": "MIT",
   "files": ["dist"],
   "main": "dist/index.js",
+  "types": "./types/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/makaronma/babel-plugin-twrnc-extract"

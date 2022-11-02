@@ -3,4 +3,7 @@ export type TwStyleList = {
   style: babel.types.TaggedTemplateExpression;
 }[];
 
-export type AttrPathType = babel.NodePath<babel.types.JSXAttribute>
+export interface PluginOptions {
+  twPath?: string;
+  acceptedJsxIdentifiers?: string[];
+}
